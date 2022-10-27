@@ -11,6 +11,9 @@ class HashTable { // get O(1), set O(1), deleteKey O(1)
   constructor(numBuckets = 8) {
     // Initialize your buckets here
     // Your code here
+    this.count = 0;
+    this.capacity = numBuckets;
+    this.data = new Array(this.capacity).fill(null)
   }
 
   hash(key) {
