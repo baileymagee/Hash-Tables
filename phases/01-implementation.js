@@ -33,6 +33,11 @@ class HashTable { // get O(1), set O(1), deleteKey O(1)
 
 
   insert(key, value) {
+
+    if (this.count + 1 > this.capacity) {
+      this.resize()
+    }
+
     const index = this.hashMod(key);
 
     let currentPair = this.data[index];
@@ -81,7 +86,19 @@ class HashTable { // get O(1), set O(1), deleteKey O(1)
 
 
   resize() {
-    // Your code here
+    let newData = new Array(this.capacity * 2).fill(null)
+    this.capacity *= 2;
+    this.count = 0
+    const oldData = this.data
+    this.data = newData;
+    for (let i = 0; i < oldData.length; i++) {
+      // this.insert(oldData[i].key, oldData[i].value)
+      let current = oldData[i]
+      while(current){
+        this.insert(current.key, current.value);
+        current = current.next
+      }
+    }
   }
 
 
