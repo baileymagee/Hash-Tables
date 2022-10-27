@@ -103,30 +103,23 @@ class HashTable { // get O(1), set O(1), deleteKey O(1)
 
 
   delete(key) {
-    // Your code here
-    let index = this.hashMod(key)
-
-    let current = this.data[index]
-    let prev;
-    if(!current) return "Key not found"
-    if (current.key === key) {
-      this.data[index] = current.next
-      this.count--
-    } else {
-      while (current.key !== key) {
-      if(current.next === null) return "Key not found"
-        prev = current
-        current = current.next
-      }
+    const index = this.hashMod(key);
+    let curr = this.data[index];
+    let elem = null;
+    while(curr && curr.key !== key){
+      elem = curr;
+      curr = elem.next;
     }
-    if(!current.next) {
-      current = null
-      this.count--
-    } else {
-      prev.next = current.next
-      current = null;
-      this.count-- 
+    if(!curr){
+      return "Key not found";
     }
+    if(!elem){
+      this.data[index] = curr.next;
+    } else{
+      elem.next = curr.next;
+    }
+    this.count--;
+    return;
   }
 }
 
