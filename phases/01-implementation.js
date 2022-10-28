@@ -62,25 +62,15 @@ class HashTable { // get O(1), set O(1), deleteKey O(1)
 
 
   read(key) {
-
-    // for(let i = 0; i < this.data.length; i++) {
-    //   let ele = this.data[i];
-    //   if(ele === null) break;
-    //   if(ele.key === key) return ele.value;
-    // }
-    let index = this.hashMod(key)
-
-    let current = this.data[index]
-    if (current.key === key) {
-      return current.value
-    } else {
-      while (current) {
-        if (current.key === key) {
-          return current.value
-        }
-        current = current.next
+    let index = this.hashMod(key);
+    let current = this.data[index];
+    while (current) {
+      if (current.key == key) {
+        return current.value;
       }
+      current = current.next
     }
+
 
   }
 
